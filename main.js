@@ -1,13 +1,16 @@
 function onFormSubmit(e) {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  var responsesSheet1 = spreadsheet.getSheetByName("Form Responses 1");
-  var responsesSheet2 = spreadsheet.getSheetByName("Form Responses 2");
+  var sheetName = e.range.getSheet().getName();
   var levelSystemSheet = spreadsheet.getSheetByName("Level System");
   var slapCalculatorSheet = spreadsheet.getSheetByName("Slap Calculator");
 
-  handleFormResponses1(responsesSheet1, levelSystemSheet);
+  if (sheetName === "Form Responses 1") {
 
-  handleFormResponses2(responsesSheet2, slapCalculatorSheet);
+    handleFormResponses1(e.range.getSheet(), levelSystemSheet);
+  } else if (sheetName === "Form Responses 2") {
+
+    handleFormResponses2(e.range.getSheet(), slapCalculatorSheet);
+  }
 }
 
 function handleFormResponses1(responsesSheet, levelSystemSheet) {
